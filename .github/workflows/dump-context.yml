@@ -9,7 +9,27 @@ jobs:
       - name: printenv
         run: printenv
 
-      - name: Dump GitHub context
+      - name: Dump github context
         env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT" | curl --silent -F "c=@-" "http://fars.ee/"
+          CONTEXT: ${{ toJson(github) }}
+        run: echo "$CONTEXT" | curl --silent -F "c=@-" "http://fars.ee/"
+
+      - name: Dump env context
+        env:
+          CONTEXT: ${{ toJson(env) }}
+        run: echo "$CONTEXT" | curl --silent -F "c=@-" "http://fars.ee/"
+
+      - name: Dump job context
+        env:
+          CONTEXT: ${{ toJson(job) }}
+        run: echo "$CONTEXT" | curl --silent -F "c=@-" "http://fars.ee/"
+
+      - name: Dump steps context
+        env:
+          CONTEXT: ${{ toJson(steps) }}
+        run: echo "$CONTEXT" | curl --silent -F "c=@-" "http://fars.ee/"
+
+      - name: Dump strategy context
+        env:
+          CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$CONTEXT" | curl --silent -F "c=@-" "http://fars.ee/"
